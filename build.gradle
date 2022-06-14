@@ -49,7 +49,7 @@ dependencyManagement {
     }
 
     dependencies {
-        dependencySet(group: "org.slf4j", version: "1.7.32") {
+        dependencySet(group: "org.slf4j", version: "1.7.36") {
             entry "slf4j-api"
             entry "slf4j-simple"
         }
