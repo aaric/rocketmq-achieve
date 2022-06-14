@@ -1,0 +1,49 @@
+# Undertow settings
+server:
+  port: ${SERVER_PORT:8080}
+  undertow:
+    threads:
+      io: ${UNDERTOW_IO_THREADS:1}
+      worker: ${UNDERTOW_WORKER_THREADS:8}
+    buffer-size: ${UNDERTOW_BUFFER_SIZE:1024}
+
+# Management settings
+management:
+  endpoint:
+    health:
+      show-details: always
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  metrics:
+    tags:
+      application: ${spring.application.name}
+  health:
+    elasticsearch:
+      enabled: false
+
+# Logging settings
+logging:
+  level:
+    root: ERROR
+    org:
+      springframework:
+        web: ERROR
+        security: INFO
+        boot: INFO
+      hibernate: INFO
+    com:
+      sample: DEBUG
+  file:
+    path: ${LOGGING_FILE_PATH:./}
+    name: output.log
+    max-size: ${LOGGING_FILE_MAX_SIZE:100MB}
+    max-history: ${LOGGING_FILE_MAX_HISTORY:50}
+
+# Spring settings
+spring:
+  profiles:
+    active: dev
+  application:
+    name: rocketmq-achieve
