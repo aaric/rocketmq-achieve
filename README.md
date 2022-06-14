@@ -10,3 +10,66 @@
 [![Release](https://img.shields.io/badge/Release-0.2.0-blue.svg)](https://github.com/aaric/rocketmq-achieve/releases)
 
 > RocketMQ Learning.
+
+## 1 Install
+
+> [rocketmq-all-4.4.0-bin-release.zip](https://archive.apache.org/dist/rocketmq/4.4.0/rocketmq-all-4.4.0-bin-release.zip)
+
+### 1.1 NameServer
+
+```bash
+# port | 9876 -> 10876
+cat > conf/namesrv.conf <<-'EOF'
+listenPort=10876
+EOF
+
+# start
+#nohup bin/mqnamesrv -c conf/namesrv.conf > /dev/null 2>&1 &
+nohup bin/mqnamesrv -c conf/namesrv.conf > namesrv.log 2>&1 &
+
+# shutdown
+bin/mqshutdown namesrv
+```
+
+### 1.2 Broker
+
+```bash
+# mem | runbroker.sh
+vim bin/runbroker.sh
+'''
+JAVA_OPT="${JAVA_OPT} -server -Xms256m -Xmx256m -Xmn128m"
+'''
+
+# mem | runserver.sh
+vim bin/runserver.sh
+'''
+JAVA_OPT="${JAVA_OPT} -server -Xms256m -Xmx256m -Xmn128m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m"
+'''
+
+# port | 10911 -> 11911
+cat >> conf/broker.conf <<-'EOF'
+
+# custom
+listenPort=10876
+EOF
+
+# start
+#nohup bin/mqbroker -n 10.0.11.25:10876 -c conf/broker.conf > /dev/null 2>&1 &
+nohup bin/mqbroker -n 10.0.11.25:10876 -c conf/broker.conf > broker.log 2>&1 &
+
+# shutdown
+bin/mqshutdown broker
+```
+
+### 1.3 Testing
+
+```bash
+# env
+export NAMESRV_ADDR=10.0.11.25:10876
+
+# producer
+bin/tools.sh org.apache.rocketmq.example.quickstart.Producer
+
+# consumer
+bin/tools.sh org.apache.rocketmq.example.quickstart.Consumer
+```
