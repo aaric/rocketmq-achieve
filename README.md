@@ -20,7 +20,7 @@
 ```bash
 # port | 9876 + 1000 -> 10876
 cat > conf/namesrv.conf <<-'EOF'
-listenPort=10876
+listenPort = 10876
 EOF
 
 # start
@@ -51,12 +51,15 @@ JAVA_OPT="${JAVA_OPT} -server -Xms256m -Xmx256m -Xmn128m -XX:MetaspaceSize=128m 
 cat >> conf/broker.conf <<-'EOF'
 
 # custom
-listenPort=11911
+namesrvAddr = 10.0.11.25:10876
+brokerIP1 = 10.0.11.25
+listenPort = 11911
 EOF
 
 # start
 #nohup bin/mqbroker -n 10.0.11.25:10876 -c conf/broker.conf > /dev/null 2>&1 &
-nohup bin/mqbroker -n 10.0.11.25:10876 -c conf/broker.conf > broker.log 2>&1 &
+#nohup bin/mqbroker -n 10.0.11.25:10876 -c conf/broker.conf > broker.log 2>&1 &
+nohup bin/mqbroker -c conf/broker.conf > broker.log 2>&1 &
 lsof -i:11911
 
 # shutdown
