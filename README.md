@@ -18,7 +18,7 @@
 ### 1.1 NameServer
 
 ```bash
-# port | 9876 -> 10876
+# port | 9876 + 1000 -> 10876
 cat > conf/namesrv.conf <<-'EOF'
 listenPort=10876
 EOF
@@ -26,6 +26,7 @@ EOF
 # start
 #nohup bin/mqnamesrv -c conf/namesrv.conf > /dev/null 2>&1 &
 nohup bin/mqnamesrv -c conf/namesrv.conf > namesrv.log 2>&1 &
+lsof -i:10876
 
 # shutdown
 bin/mqshutdown namesrv
@@ -46,16 +47,17 @@ vim bin/runserver.sh
 JAVA_OPT="${JAVA_OPT} -server -Xms256m -Xmx256m -Xmn128m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=320m"
 '''
 
-# port | 10911 -> 11911
+# port | 10911 + 1000 -> 11911
 cat >> conf/broker.conf <<-'EOF'
 
 # custom
-listenPort=10876
+listenPort=11911
 EOF
 
 # start
 #nohup bin/mqbroker -n 10.0.11.25:10876 -c conf/broker.conf > /dev/null 2>&1 &
 nohup bin/mqbroker -n 10.0.11.25:10876 -c conf/broker.conf > broker.log 2>&1 &
+lsof -i:11911
 
 # shutdown
 bin/mqshutdown broker
