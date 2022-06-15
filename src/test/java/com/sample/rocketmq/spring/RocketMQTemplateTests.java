@@ -3,15 +3,19 @@ package com.sample.rocketmq.spring;
 import lombok.extern.slf4j.Slf4j;
 import org.apache.rocketmq.client.producer.SendCallback;
 import org.apache.rocketmq.client.producer.SendResult;
+import org.apache.rocketmq.client.producer.TransactionSendResult;
 import org.apache.rocketmq.spring.core.RocketMQTemplate;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -63,6 +67,29 @@ public class RocketMQTemplateTests {
     public void testSendOneWay() {
         Assertions.assertDoesNotThrow(() -> {
             rocketMQTemplate.sendOneWay("TopicTest:TagA", " the one way msg");
+        });
+    }
+
+    @Disabled
+    @Test
+    public void testSendOneWayOrderly() {
+        Assertions.assertDoesNotThrow(() -> {
+            String hashKey = UUID.randomUUID().toString();
+            rocketMQTemplate.sendOneWayOrderly("TopicTest:TagA", " the one way orderly msg", hashKey);
+        });
+    }
+
+    @Disabled
+    @Test
+    public void testSendMessageInTransaction() {
+        Assertions.assertDoesNotThrow(() -> {
+            String txId = UUID.randomUUID().toString();
+            String msg = "the transaction msg";
+            TransactionSendResult sendResult = rocketMQTemplate.sendMessageInTransaction("tx-aaa",
+                    "TopicTest:TagA",
+                    MessageBuilder.withPayload(msg).setHeader("txId", txId).build(),
+                    msg);
+            log.info("{}", sendResult);
         });
     }
 }
