@@ -27,14 +27,13 @@ public class ProducerTests {
     private String namesrvAddr;
 
     @Value("${rocketmq.producer.group}")
-    private String producerGroup;
+    private String groupName;
 
     @Disabled
     @RepeatedTest(10)
     public void testSend() {
         Assertions.assertDoesNotThrow(() -> {
-            System.err.println(producerGroup);
-            DefaultMQProducer producer = new DefaultMQProducer(producerGroup);
+            DefaultMQProducer producer = new DefaultMQProducer(groupName);
             producer.setNamesrvAddr(namesrvAddr);
             producer.start();
             Message msg = new Message("TopicTest", "TagA", "Hello RocketMQ".getBytes());
