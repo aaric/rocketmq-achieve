@@ -57,4 +57,12 @@ public class RocketMQTemplateTests {
             TimeUnit.SECONDS.sleep(15);
         });
     }
+
+    @Disabled
+    @Test
+    public void testSendOneWay() {
+        Assertions.assertDoesNotThrow(() -> {
+            rocketMQTemplate.sendOneWay("TopicTest:TagA", " the one way msg");
+        });
+    }
 }
