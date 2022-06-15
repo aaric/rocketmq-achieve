@@ -7,7 +7,7 @@
 [![Spring Boot](https://img.shields.io/badge/Spring_Boot-2.3.2-brightgreen.svg?style=flat&logo=springboot)](https://docs.spring.io/spring-boot/docs/2.3.2.RELEASE/reference/htmlsingle/)
 [![Spring Cloud](https://img.shields.io/badge/Spring_Cloud-Hoxton.SR9-brightgreen.svg?style=flat&logo=spring)](https://docs.spring.io/spring-cloud/docs/Hoxton.SR9/reference/htmlsingle/)
 [![Spring Cloud Alibaba](https://img.shields.io/badge/Spring_Cloud_Alibaba-2.2.6-brightgreen.svg?style=flat&logo=alibabacloud)](https://spring-cloud-alibaba-group.github.io/github-pages/hoxton/zh-cn/index.html)
-[![Release](https://img.shields.io/badge/Release-0.2.0-blue.svg)](https://github.com/aaric/rocketmq-achieve/releases)
+[![Release](https://img.shields.io/badge/Release-0.3.0-blue.svg)](https://github.com/aaric/rocketmq-achieve/releases)
 
 > RocketMQ Learning.
 
