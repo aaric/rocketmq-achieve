@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
+import java.util.UUID;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -63,6 +64,14 @@ public class RocketMQTemplateTests {
     public void testSendOneWay() {
         Assertions.assertDoesNotThrow(() -> {
             rocketMQTemplate.sendOneWay("TopicTest:TagA", " the one way msg");
+        });
+    }
+
+    @Test
+    public void testSendOneWayOrderly() {
+        Assertions.assertDoesNotThrow(() -> {
+            String hashKey = UUID.randomUUID().toString();
+            rocketMQTemplate.sendOneWayOrderly("TopicTest:TagA", " the one way orderly msg", hashKey);
         });
     }
 }
