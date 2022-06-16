@@ -21,6 +21,6 @@ public class TestController implements TestApi {
     @GetMapping("/hello")
     @Override
     public String helloGet(@RequestParam String name) {
-        return String.format("hello, {}", name);
+        return String.format("hello, %s!", name);
     }
 }
