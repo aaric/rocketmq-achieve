@@ -34,7 +34,7 @@ import java.util.List;
 @EnableOpenApi
 @EnableKnife4j
 @Configuration
-public class Knife4jConfig  implements InitializingBean {
+public class Knife4jConfig implements InitializingBean {
 
     @Value("localhost")
     private String serverHost;
@@ -77,12 +77,12 @@ public class Knife4jConfig  implements InitializingBean {
                 .apiInfo(apiInfo())
                 .directModelSubstitute(Date.class, Long.class)
                 .select()
-                .apis(RequestHandlerSelectors.basePackage("com.incarcloud.pdpm2"))
+                .apis(RequestHandlerSelectors.basePackage("com.sample"))
                 .paths(PathSelectors.any())
                 .build()
-                .globalRequestParameters(globalRequestParameters())
-                .securitySchemes(securitySchemes())
-                .securityContexts(securityContexts());
+                .globalRequestParameters(globalRequestParameters());
+//                .securitySchemes(securitySchemes())
+//                .securityContexts(securityContexts());
     }
 
     static List<RequestParameter> globalRequestParameters() {
