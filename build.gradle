@@ -34,6 +34,8 @@ dependencies {
     }
     implementation "org.springframework.boot:spring-boot-starter-undertow"
 
+    implementation "com.github.xiaoymin:knife4j-spring-boot-starter"
+
     implementation "com.alibaba.cloud:spring-cloud-starter-stream-rocketmq"
 
     implementation "org.springframework.boot:spring-boot-starter-actuator"
