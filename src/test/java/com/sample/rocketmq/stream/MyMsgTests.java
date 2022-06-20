@@ -7,6 +7,9 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.integration.channel.PublishSubscribeChannel;
+import org.springframework.messaging.SubscribableChannel;
+import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 /**
@@ -25,7 +28,14 @@ public class MyMsgTests {
 
     @Disabled
     @Test
-    public void testSend() {
-        System.err.println(mySource);
+    public void testChannel() {
+//        SubscribableChannel channel = new DirectChannel();
+        SubscribableChannel channel = new PublishSubscribeChannel();
+
+        channel.subscribe(msg -> log.info("receive1: {}", msg.getPayload()));
+        channel.subscribe(msg -> log.info("receive2: {}", msg.getPayload()));
+
+        channel.send(MessageBuilder.withPayload("msg1").build());
+        channel.send(MessageBuilder.withPayload("msg2").build());
     }
 }
