@@ -73,7 +73,9 @@ spring:
         input:
           destination: TopicTest
           content-type: text/plain
-          group: GroupTest1
+          group: GroupTest
+          consumer:
+            max-attempts: 1
 #        output1:
 #          destination: topic1
 #          content-type: application/json
@@ -86,6 +88,9 @@ spring:
           output:
             producer:
               group: GroupTest
+              sync: true
+            consumer:
+              orderly: true
 #          channel1:
 #            producer:
 #              group: GroupTest

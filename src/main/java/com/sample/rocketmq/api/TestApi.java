@@ -13,6 +13,6 @@ import io.swagger.annotations.ApiParam;
 @Api(tags = "TestApi")
 public interface TestApi {
 
-    @ApiOperation("Hello World")
-    String helloGet(@ApiParam("Name") String name);
+    @ApiOperation("source send")
+    String sourceSendGet(@ApiParam("Your name") String name);
 }

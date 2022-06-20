@@ -1,6 +1,5 @@
 package com.sample.rocketmq.stream;
 
-import com.sample.rocketmq.msg.MySource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
@@ -9,6 +8,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.stream.messaging.Source;
+import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.channel.PublishSubscribeChannel;
 import org.springframework.messaging.SubscribableChannel;
 import org.springframework.messaging.support.MessageBuilder;
@@ -30,9 +30,22 @@ public class MyMsgTests {
 
     @Disabled
     @Test
-    public void testChannel() {
+    public void testDirectChannel() {
         Assertions.assertDoesNotThrow(() -> {
-//            SubscribableChannel channel = new DirectChannel();
+            SubscribableChannel channel = new DirectChannel();
+
+            channel.subscribe(msg -> log.info("receive1: {}", msg.getPayload()));
+            channel.subscribe(msg -> log.info("receive2: {}", msg.getPayload()));
+
+            channel.send(MessageBuilder.withPayload("msg1").build());
+            channel.send(MessageBuilder.withPayload("msg2").build());
+        });
+    }
+
+    @Disabled
+    @Test
+    public void testPublishSubscribeChannel() {
+        Assertions.assertDoesNotThrow(() -> {
             SubscribableChannel channel = new PublishSubscribeChannel();
 
             channel.subscribe(msg -> log.info("receive1: {}", msg.getPayload()));
@@ -43,10 +56,11 @@ public class MyMsgTests {
         });
     }
 
+    @Disabled
     @Test
     public void testSource() {
         Assertions.assertDoesNotThrow(() -> {
-            System.err.println(source);
+            log.info("{}", source.output().send(MessageBuilder.withPayload("hello source").build()));
         });
     }
 }
