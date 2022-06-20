@@ -8,6 +8,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.integration.channel.PublishSubscribeChannel;
 import org.springframework.messaging.SubscribableChannel;
 import org.springframework.messaging.support.MessageBuilder;
@@ -25,7 +26,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
 public class MyMsgTests {
 
     @Autowired
-    private MySource mySource;
+    private Source source;
 
     @Disabled
     @Test
@@ -45,7 +46,7 @@ public class MyMsgTests {
     @Test
     public void testSource() {
         Assertions.assertDoesNotThrow(() -> {
-            System.err.println(mySource);
+            System.err.println(source);
         });
     }
 }

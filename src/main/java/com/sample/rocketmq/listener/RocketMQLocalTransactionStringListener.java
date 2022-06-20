@@ -2,11 +2,9 @@ package com.sample.rocketmq.listener;
 
 import lombok.extern.slf4j.Slf4j;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.rocketmq.spring.annotation.RocketMQTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionListener;
 import org.apache.rocketmq.spring.core.RocketMQLocalTransactionState;
 import org.springframework.messaging.Message;
-import org.springframework.stereotype.Component;
 
 /**
  * RocketMQLocalTransactionStringListener
@@ -15,8 +13,8 @@ import org.springframework.stereotype.Component;
  * @version 0.3.0-SNAPSHOT
  */
 @Slf4j
-@Component
-@RocketMQTransactionListener(txProducerGroup = "tx-aaa")
+//@Component
+//@RocketMQTransactionListener(txProducerGroup = "tx-aaa")
 public class RocketMQLocalTransactionStringListener implements RocketMQLocalTransactionListener {
 
     @Override

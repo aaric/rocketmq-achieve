@@ -79,14 +79,13 @@ spring:
 #          content-type: application/json
       # RocketMQBinderConfigurationProperties
       rocketmq:
+        binder:
+          name-server: 127.0.0.1:9876
+          enable-msg-trace: false
         bindings:
           output:
             producer:
               group: GroupTest
-#        binder:
-#          name-server: 127.0.0.1:9876
-#          enable-msg-trace: false
-#        bindings:
 #          channel1:
 #            producer:
 #              group: GroupTest
