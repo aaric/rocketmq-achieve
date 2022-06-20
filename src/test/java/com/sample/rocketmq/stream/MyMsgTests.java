@@ -2,7 +2,6 @@ package com.sample.rocketmq.stream;
 
 import com.sample.rocketmq.msg.MySource;
 import lombok.extern.slf4j.Slf4j;
-import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -27,8 +26,6 @@ public class MyMsgTests {
     @Disabled
     @Test
     public void testSend() {
-        Assertions.assertDoesNotThrow(() -> {
-            System.err.println(mySource);
-        });
+        System.err.println(mySource);
     }
 }

@@ -11,7 +11,7 @@ import org.springframework.cloud.stream.annotation.EnableBinding;
  * @author Aaric, created on 2022-06-14T14:50.
  * @version 0.1.0-SNAPSHOT
  */
-@EnableBinding(MySource.class)
+@EnableBinding({MySource.class})
 @SpringBootApplication
 public class MyApp {
 
