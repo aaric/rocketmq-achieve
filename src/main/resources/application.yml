@@ -65,24 +65,31 @@ spring:
     name: rocketmq-achieve
   cloud:
     stream:
-      # RocketMQBinderConfigurationProperties
-      rocketmq:
-        binder:
-          name-server: 127.0.0.1:9876
-          enable-msg-trace: false
-        bindings:
-          channel1:
-            producer:
-              group: GroupTest
-              sync: true
-            consumer:
-              tags: TagA || TagB
-              orderly: true
       # BindingProperties
       bindings:
-        output1:
-          destination: topic1
-          content-type: application/json
+        output:
+          destination: TopicTest
+          content-type: text/plain
+        input:
+          destination: TopicTest
+          content-type: text/plain
+          group: GroupTest
+#        output1:
+#          destination: topic1
+#          content-type: application/json
+      # RocketMQBinderConfigurationProperties
+#      rocketmq:
+#        binder:
+#          name-server: 127.0.0.1:9876
+#          enable-msg-trace: false
+#        bindings:
+#          channel1:
+#            producer:
+#              group: GroupTest
+#              sync: true
+#            consumer:
+#              tags: TagA || TagB
+#              orderly: true
 
 # RocketMQ settings
 #rocketmq:

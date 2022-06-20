@@ -2,6 +2,7 @@ package com.sample.rocketmq.stream;
 
 import com.sample.rocketmq.msg.MySource;
 import lombok.extern.slf4j.Slf4j;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -29,13 +30,22 @@ public class MyMsgTests {
     @Disabled
     @Test
     public void testChannel() {
-//        SubscribableChannel channel = new DirectChannel();
-        SubscribableChannel channel = new PublishSubscribeChannel();
+        Assertions.assertDoesNotThrow(() -> {
+//            SubscribableChannel channel = new DirectChannel();
+            SubscribableChannel channel = new PublishSubscribeChannel();
 
-        channel.subscribe(msg -> log.info("receive1: {}", msg.getPayload()));
-        channel.subscribe(msg -> log.info("receive2: {}", msg.getPayload()));
+            channel.subscribe(msg -> log.info("receive1: {}", msg.getPayload()));
+            channel.subscribe(msg -> log.info("receive2: {}", msg.getPayload()));
 
-        channel.send(MessageBuilder.withPayload("msg1").build());
-        channel.send(MessageBuilder.withPayload("msg2").build());
+            channel.send(MessageBuilder.withPayload("msg1").build());
+            channel.send(MessageBuilder.withPayload("msg2").build());
+        });
+    }
+
+    @Test
+    public void testSource() {
+        Assertions.assertDoesNotThrow(() -> {
+            System.err.println(mySource);
+        });
     }
 }

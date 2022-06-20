@@ -20,7 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/test")
 public class TestController implements TestApi {
 
-    @Autowired
+    @Autowired(required = false)
     private MySource mySource;
 
     @GetMapping("/hello")
