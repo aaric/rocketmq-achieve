@@ -73,12 +73,16 @@ spring:
         input:
           destination: TopicTest
           content-type: text/plain
-          group: GroupTest
+          group: GroupTest1
 #        output1:
 #          destination: topic1
 #          content-type: application/json
       # RocketMQBinderConfigurationProperties
-#      rocketmq:
+      rocketmq:
+        bindings:
+          output:
+            producer:
+              group: GroupTest
 #        binder:
 #          name-server: 127.0.0.1:9876
 #          enable-msg-trace: false
