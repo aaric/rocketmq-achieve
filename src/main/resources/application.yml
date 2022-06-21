@@ -76,9 +76,16 @@ spring:
           group: GroupTest
           consumer:
             max-attempts: 1
-#        output1:
-#          destination: topic1
+        my-output:
+          destination: MyTopicTest
 #          content-type: application/json
+          content-type: text/plain
+        my-input:
+          destination: MyTopicTest
+          content-type: text/plain
+          group: MyGroupTest
+          consumer:
+            max-attempts: 1
       # RocketMQBinderConfigurationProperties
       rocketmq:
         binder:
@@ -91,13 +98,13 @@ spring:
               sync: true
             consumer:
               orderly: true
-#          channel1:
-#            producer:
-#              group: GroupTest
-#              sync: true
-#            consumer:
-#              tags: TagA || TagB
-#              orderly: true
+          my-output:
+            producer:
+              group: MyGroupTest
+              sync: true
+            consumer:
+              tags: TagA || TagB
+              orderly: true
 
 # RocketMQ settings
 #rocketmq:

@@ -1,5 +1,6 @@
 package com.sample.rocketmq.config;
 
+import com.sample.rocketmq.msg.MySink;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.cloud.stream.annotation.StreamListener;
 import org.springframework.cloud.stream.messaging.Sink;
@@ -18,5 +19,10 @@ public class RocketMQConfig {
     @StreamListener(Sink.INPUT)
     public void receiveSink(String msg) {
         log.info("receiveSink: {}", msg);
+    }
+
+    @StreamListener(MySink.INPUT)
+    public void receiveMySink(String msg) {
+        log.info("receiveMySink: {}", msg);
     }
 }

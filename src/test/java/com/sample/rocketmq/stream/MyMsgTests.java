@@ -1,5 +1,6 @@
 package com.sample.rocketmq.stream;
 
+import com.sample.rocketmq.msg.MySource;
 import lombok.extern.slf4j.Slf4j;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
@@ -27,6 +28,9 @@ public class MyMsgTests {
 
     @Autowired
     private Source source;
+
+    @Autowired
+    private MySource mySource;
 
     @Disabled
     @Test
@@ -58,9 +62,17 @@ public class MyMsgTests {
 
     @Disabled
     @Test
-    public void testSource() {
+    public void testSourceSend() {
         Assertions.assertDoesNotThrow(() -> {
             log.info("{}", source.output().send(MessageBuilder.withPayload("hello source").build()));
+        });
+    }
+
+//    @Disabled
+    @Test
+    public void testMySourceSend() {
+        Assertions.assertDoesNotThrow(() -> {
+            log.info("{}", mySource.output().send(MessageBuilder.withPayload("hello my source").build()));
         });
     }
 }

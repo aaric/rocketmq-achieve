@@ -15,4 +15,7 @@ public interface TestApi {
 
     @ApiOperation("source send")
     String sourceSendGet(@ApiParam("Your name") String name);
+
+    @ApiOperation("my source send")
+    String mySourceSendGet(@ApiParam("Your name") String name);
 }

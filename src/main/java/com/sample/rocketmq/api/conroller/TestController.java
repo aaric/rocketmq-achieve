@@ -1,6 +1,7 @@
 package com.sample.rocketmq.api.conroller;
 
 import com.sample.rocketmq.api.TestApi;
+import com.sample.rocketmq.msg.MySource;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.cloud.stream.messaging.Source;
@@ -24,11 +25,22 @@ public class TestController implements TestApi {
     @Autowired
     private Source source;
 
+    @Autowired
+    private MySource mySource;
+
     @GetMapping("/source/send")
     @Override
     public String sourceSendGet(@RequestParam String name) {
         String content = String.format("hello, %s!", name);
         source.output().send(MessageBuilder.withPayload(content).build());
+        return content;
+    }
+
+    @GetMapping("/my/source/send")
+    @Override
+    public String mySourceSendGet(String name) {
+        String content = String.format("Nice to meet %s!", name);
+        mySource.output().send(MessageBuilder.withPayload(content).build());
         return content;
     }
 }
