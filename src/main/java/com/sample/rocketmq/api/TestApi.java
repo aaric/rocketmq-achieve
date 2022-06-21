@@ -15,15 +15,15 @@ import io.swagger.annotations.ApiParam;
 @Api(tags = "TestApi")
 public interface TestApi {
 
-    @ApiOperation("source send")
-    String sourceSendGet(@ApiParam("Your name") String name);
+    @ApiOperation("默认源发送字符串")
+    String sourceSendGet(@ApiParam("你的名字") String name);
 
-    @ApiOperation("my source send")
-    String mySourceSendGet(@ApiParam("Your name") String name);
+    @ApiOperation("自定义源发送字符串")
+    String mySourceSendGet(@ApiParam("你的名字") String name);
 
-    @ApiOperation("my source send log")
+    @ApiOperation("自定义源发送日志对象")
     Boolean mySourceSendLogPost(@ApiParam LogMsg logMsg);
 
-    @ApiOperation("my source send notify")
+    @ApiOperation("自定义源发送通知对象")
     Boolean mySourceSendNotifyPost(@ApiParam NotifyMsg notifyMsg);
 }

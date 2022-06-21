@@ -13,15 +13,15 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel("NotifyMsg")
+@ApiModel("通知消息")
 public class NotifyMsg {
 
     public static final String DEFAULT_HEADER_VALUE = "notify";
 
-    @ApiModelProperty(position = 1, value = "From", example = "11")
+    @ApiModelProperty(position = 1, value = "发送人", example = "11")
     private String from;
-    @ApiModelProperty(position = 2, value = "Tos", example = "['22', '33']")
+    @ApiModelProperty(position = 2, value = "接收人列表", example = "['22', '33']")
     private String[] to;
-    @ApiModelProperty(position = 3, value = "Content", example = "hello notify")
+    @ApiModelProperty(position = 3, value = "内容", example = "hello notify")
     private String content;
 }

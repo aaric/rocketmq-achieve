@@ -13,15 +13,15 @@ import lombok.experimental.Accessors;
  */
 @Data
 @Accessors(chain = true)
-@ApiModel("LogMsg")
+@ApiModel("日志消息")
 public class LogMsg {
 
     public static final String DEFAULT_HEADER_VALUE = "log";
 
     @ApiModelProperty(position = 1, value = "ID", example = "1")
     private Integer id;
-    @ApiModelProperty(position = 2, value = "Type", example = "1")
+    @ApiModelProperty(position = 2, value = "日志类型", example = "1")
     private Integer logType;
-    @ApiModelProperty(position = 3, value = "Content", example = "hello log")
+    @ApiModelProperty(position = 3, value = "内容", example = "hello log")
     private String content;
 }
