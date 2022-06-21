@@ -16,6 +16,8 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class RocketMQConfig {
 
+    public static final String DEFAULT_HEADER_NAME = "X-Msg-Type";
+
     @StreamListener(Sink.INPUT)
     public void receiveSink(String msg) {
         log.info("receiveSink: {}", msg);

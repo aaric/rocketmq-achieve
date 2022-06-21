@@ -1,7 +1,11 @@
 package com.sample.rocketmq.stream;
 
+import com.sample.rocketmq.config.RocketMQConfig;
+import com.sample.rocketmq.msg.LogMsg;
 import com.sample.rocketmq.msg.MySource;
+import com.sample.rocketmq.msg.NotifyMsg;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.RandomUtils;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
@@ -11,6 +15,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.cloud.stream.messaging.Source;
 import org.springframework.integration.channel.DirectChannel;
 import org.springframework.integration.channel.PublishSubscribeChannel;
+import org.springframework.messaging.Message;
 import org.springframework.messaging.SubscribableChannel;
 import org.springframework.messaging.support.MessageBuilder;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
@@ -68,11 +73,39 @@ public class MyMsgTests {
         });
     }
 
-//    @Disabled
+    @Disabled
     @Test
     public void testMySourceSend() {
         Assertions.assertDoesNotThrow(() -> {
             log.info("{}", mySource.output().send(MessageBuilder.withPayload("hello my source").build()));
+        });
+    }
+
+    @Disabled
+    @Test
+    public void testMySourceSendLogMsg() {
+        Assertions.assertDoesNotThrow(() -> {
+            LogMsg log = new LogMsg()
+                    .setId(RandomUtils.nextInt())
+                    .setLogType(1)
+                    .setContent("hello log");
+            Message<LogMsg> msg = MessageBuilder.withPayload(log)
+                    .setHeader(RocketMQConfig.DEFAULT_HEADER_NAME, LogMsg.DEFAULT_HEADER_VALUE).build();
+            mySource.output().send(msg);
+        });
+    }
+
+    @Disabled
+    @Test
+    public void testMySourceSendNotifyMsg() {
+        Assertions.assertDoesNotThrow(() -> {
+            NotifyMsg notify = new NotifyMsg()
+                    .setFrom("11")
+                    .setTo(new String[]{"22", "333"})
+                    .setContent("hello notify");
+            Message<NotifyMsg> msg = MessageBuilder.withPayload(notify)
+                    .setHeader(RocketMQConfig.DEFAULT_HEADER_NAME, NotifyMsg.DEFAULT_HEADER_VALUE).build();
+            mySource.output().send(msg);
         });
     }
 }
