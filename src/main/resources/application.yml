@@ -41,15 +41,72 @@ logging:
     max-size: ${LOGGING_FILE_MAX_SIZE:100MB}
     max-history: ${LOGGING_FILE_MAX_HISTORY:50}
 
+# Knife4j settings
+knife4j:
+  enable: true
+  setting:
+    enableOpenApi: false
+    enableFooterCustom: true
+    footerCustomContent: 版权所有 | Copyright 2022
+  document:
+    title: 在线API文档
+    description: 学习项目
+    version: 0.4.0
+    developer:
+      name: InCar
+      url: https://github.com/aaric
+      email: vipaaric@gmail.com
+
 # Spring settings
 spring:
   profiles:
     active: dev
   application:
     name: rocketmq-achieve
+  cloud:
+    stream:
+      # BindingProperties
+      bindings:
+        output:
+          destination: TopicTest
+          content-type: text/plain
+        input:
+          destination: TopicTest
+          content-type: text/plain
+          group: GroupTest
+          consumer:
+            max-attempts: 1
+        my-output:
+          destination: MyTopicTest
+          content-type: application/json
+        my-input:
+          destination: MyTopicTest
+          content-type: application/json
+          group: MyGroupTest
+          consumer:
+            max-attempts: 1
+      # RocketMQBinderConfigurationProperties
+      rocketmq:
+        binder:
+          name-server: 127.0.0.1:9876
+          enable-msg-trace: false
+        bindings:
+          output:
+            producer:
+              group: GroupTest
+              sync: true
+            consumer:
+              orderly: true
+          my-output:
+            producer:
+              group: MyGroupTest
+              sync: true
+            consumer:
+              tags: TagA || TagB
+              orderly: true
 
 # RocketMQ settings
-rocketmq:
-  name-server: 127.0.0.1:9876
-  producer:
-    group: GroupTest
+#rocketmq:
+#  name-server: 127.0.0.1:9876
+#  producer:
+#    group: GroupTest
