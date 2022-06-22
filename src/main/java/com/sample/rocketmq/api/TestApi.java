@@ -12,7 +12,7 @@ import io.swagger.annotations.ApiParam;
  * @author Aaric, created on 2022-06-16T10:32.
  * @version 0.4.0-SNAPSHOT
  */
-@Api(tags = "TestApi")
+@Api(tags = "测试API")
 public interface TestApi {
 
     @ApiOperation("默认源发送字符串")

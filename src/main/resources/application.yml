@@ -78,11 +78,10 @@ spring:
             max-attempts: 1
         my-output:
           destination: MyTopicTest
-#          content-type: application/json
-          content-type: text/plain
+          content-type: application/json
         my-input:
           destination: MyTopicTest
-          content-type: text/plain
+          content-type: application/json
           group: MyGroupTest
           consumer:
             max-attempts: 1

@@ -18,6 +18,7 @@ import org.springframework.test.context.junit.jupiter.SpringExtension;
  * @author Aaric, created on 2022-06-15T10:15.
  * @version 0.2.0-SNAPSHOT
  */
+@Disabled
 @Slf4j
 @SpringBootTest
 @ExtendWith(SpringExtension.class)

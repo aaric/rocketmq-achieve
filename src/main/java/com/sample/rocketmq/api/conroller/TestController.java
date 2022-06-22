@@ -33,7 +33,9 @@ public class TestController implements TestApi {
     @GetMapping("/source/send")
     public String sourceSendGet(@RequestParam String name) {
         String content = String.format("hello, %s!", name);
-        source.output().send(MessageBuilder.withPayload(content).build());
+        Message<String> msg = MessageBuilder.withPayload(content)
+                .setHeader(RocketMQConfig.DEFAULT_HEADER_NAME, "test").build();
+        source.output().send(msg);
         return content;
     }
 
